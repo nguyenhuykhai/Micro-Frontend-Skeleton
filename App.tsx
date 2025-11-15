@@ -1,6 +1,8 @@
 "use client";
 
 import { Plus } from "lucide-react";
+import { onSnapshot, doc } from "firebase/firestore";
+import { db, auth } from "./lib/firebase";
 import React, { useEffect, useMemo, useState } from "react";
 import Dashboard from "./components/Dashboard";
 import GoogleAuth from "./components/GoogleAuth";
@@ -8,6 +10,7 @@ import Header from "./components/Header";
 import SprintManager from "./components/SprintManager";
 import TaskFormModal from "./components/TaskFormModal";
 import TaskTable from "./components/TaskTable";
+import AdBlockerModal from "./components/AdBlockerModal"; // ← NEW
 import { Button } from "./components/ui/button";
 import {
   Card,
@@ -24,6 +27,7 @@ type View = "dashboard" | "sprints";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [adBlockOpen, setAdBlockOpen] = useState(false);
 
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
@@ -42,6 +46,53 @@ const App: React.FC = () => {
 
   const { tasks, sprints, filterValue } = useTaskStore();
 
+  // === Ad-blocker Detection ===
+  const [isListenerBlocked, setIsListenerBlocked] = useState(false);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const userId = auth.currentUser?.uid;
+    if (!userId) return;
+
+    // Try to set up a dummy listener to detect blocking
+    let timeout: NodeJS.Timeout;
+    const testCol = `users/${userId}/_healthcheck`;
+
+    const unsub = onSnapshot(
+      doc(db, testCol, "check"),
+      () => {},
+      (err: any) => {
+        const msg = err?.message?.toLowerCase() || "";
+        if (
+          msg.includes("blocked") ||
+          msg.includes("aborted") ||
+          err?.code === "unavailable"
+        ) {
+          setIsListenerBlocked(true);
+        }
+      }
+    );
+
+    // Fallback: if no error in 5s, assume OK
+    timeout = setTimeout(() => {
+      setIsListenerBlocked(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeout);
+      unsub?.();
+    };
+  }, [isAuthenticated]);
+
+  // Show modal when blocked
+  useEffect(() => {
+    if (isListenerBlocked) {
+      setAdBlockOpen(true);
+    }
+  }, [isListenerBlocked]);
+
+  // === Dark Mode ===
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -65,9 +116,7 @@ const App: React.FC = () => {
   };
 
   const filteredTasks = useMemo(() => {
-    if (filterValue === "all_time") {
-      return tasks;
-    }
+    if (filterValue === "all_time") return tasks;
 
     if (filterValue === "current_sprint") {
       const today = new Date().toISOString().split("T")[0];
@@ -128,7 +177,7 @@ const App: React.FC = () => {
                     onClick={() => handleOpenTaskModal()}
                     disabled={sprints.length === 0}
                     size="lg"
-                    gap-2
+                    className="gap-2"
                   >
                     <Plus size={20} />
                     <span className="hidden sm:inline">Add Task</span>
@@ -159,6 +208,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
+      {/* Task Modal */}
       {isTaskModalOpen && (
         <TaskFormModal
           isOpen={isTaskModalOpen}
@@ -166,6 +216,12 @@ const App: React.FC = () => {
           task={editingTask}
         />
       )}
+
+      {/* Ad-blocker Modal */}
+      <AdBlockerModal
+        open={adBlockOpen}
+        onClose={() => setAdBlockOpen(false)}
+      />
     </div>
   );
 };
