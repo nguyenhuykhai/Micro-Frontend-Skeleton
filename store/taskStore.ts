@@ -1,8 +1,11 @@
+'use client';
+
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 import type { Sprint, Task, TaskStore } from '../types';
 import { persist } from 'zustand/middleware';
+import { useAuthStore } from './authStore';
 
 // Helper function to transform DB task to app Task
 const transformTask = (t: any): Task => ({
@@ -60,24 +63,61 @@ export const useTaskStore = create<TaskStore>()(
       sprints: [],
       filterValue: 'current_sprint',
 
-      addTask: async (task: Omit<Task, 'id'>) => {
+      loadTasks: async () => {
+        const userId = useAuthStore.getState().userId;
+        if (!userId) {
+          console.error('No userId available');
+          return;
+        }
+
+        try {
+          const tasks = await fetchTasks(userId);
+          set({ tasks });
+        } catch (error) {
+          console.error('Failed to load tasks:', error);
+          toast.error('Failed to load tasks');
+        }
+      },
+
+      loadSprints: async () => {
+        const userId = useAuthStore.getState().userId;
+        if (!userId) {
+          console.error('No userId available');
+          return;
+        }
+
+        try {
+          const sprints = await fetchSprints(userId);
+          console.log('🚀 ~ sprints:', sprints);
+          set({ sprints });
+        } catch (error) {
+          console.error('Failed to load sprints:', error);
+          toast.error('Failed to load sprints');
+        }
+      },
+
+      addTask: async (task: Omit<Task, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => {
+        const userId = useAuthStore.getState().userId;
+        if (!userId) throw new Error('User not authenticated');
+
         const tempId = `temp-${Date.now()}`;
-        const optimisticTask: Task = { ...task, id: tempId };
+        const optimisticTask: Task = {
+          ...task,
+          id: tempId,
+          user_id: userId,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
 
         // Optimistic update
         set((state) => ({ tasks: [...state.tasks, optimisticTask] }));
 
         try {
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
-          if (!user) throw new Error('User not authenticated');
-
           const { data, error } = await supabase
             .from('tasks')
             .insert([
               {
-                user_id: user.id,
+                user_id: userId,
                 sprint_id: task.sprint_id,
                 task: task.task,
                 link: task.link,
@@ -111,7 +151,7 @@ export const useTaskStore = create<TaskStore>()(
         }
       },
 
-      updateTask: async (task) => {
+      updateTask: async (task: Task) => {
         const previousTasks = get().tasks;
 
         // Optimistic update
@@ -120,11 +160,6 @@ export const useTaskStore = create<TaskStore>()(
         }));
 
         try {
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
-          if (!user) throw new Error('User not authenticated');
-
           const { error } = await supabase
             .from('tasks')
             .update({
@@ -153,7 +188,7 @@ export const useTaskStore = create<TaskStore>()(
         }
       },
 
-      deleteTask: async (id) => {
+      deleteTask: async (id: string) => {
         const previousTasks = get().tasks;
 
         // Optimistic update
@@ -175,24 +210,28 @@ export const useTaskStore = create<TaskStore>()(
         }
       },
 
-      addSprint: async (sprint) => {
+      addSprint: async (sprint: Omit<Sprint, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => {
+        const userId = useAuthStore.getState().userId;
+        if (!userId) throw new Error('User not authenticated');
+
         const tempId = `temp-${Date.now()}`;
-        const optimisticSprint: Sprint = { ...sprint, id: tempId };
+        const optimisticSprint: Sprint = {
+          ...sprint,
+          id: tempId,
+          user_id: userId,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
 
         // Optimistic update
         set((state) => ({ sprints: [optimisticSprint, ...state.sprints] }));
 
         try {
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
-          if (!user) throw new Error('User not authenticated');
-
           const { data, error } = await supabase
             .from('sprints')
             .insert([
               {
-                user_id: user.id,
+                user_id: userId,
                 name: sprint.name,
                 start_date: sprint.start_date,
                 end_date: sprint.end_date,
@@ -221,7 +260,7 @@ export const useTaskStore = create<TaskStore>()(
         }
       },
 
-      updateSprint: async (sprint) => {
+      updateSprint: async (sprint: Sprint) => {
         const previousSprints = get().sprints;
 
         // Optimistic update
@@ -251,7 +290,7 @@ export const useTaskStore = create<TaskStore>()(
         }
       },
 
-      deleteSprint: async (id) => {
+      deleteSprint: async (id: string) => {
         const previousSprints = get().sprints;
         const previousTasks = get().tasks;
 
@@ -281,24 +320,22 @@ export const useTaskStore = create<TaskStore>()(
         }
       },
 
-      setFilterValue: (filter) => {
+      setFilterValue: (filter: string) => {
         set({ filterValue: filter });
       },
 
-      importData: async (data) => {
-        try {
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
-          if (!user) throw new Error('User not authenticated');
+      importData: async (data: { tasks: Task[]; sprints: Sprint[] }) => {
+        const userId = useAuthStore.getState().userId;
+        if (!userId) throw new Error('User not authenticated');
 
+        try {
           // Show loading toast
           const loadingToast = toast.loading('Importing data...');
 
           // Delete existing data
           await Promise.all([
-            supabase.from('tasks').delete().eq('user_id', user.id),
-            supabase.from('sprints').delete().eq('user_id', user.id),
+            supabase.from('tasks').delete().eq('user_id', userId),
+            supabase.from('sprints').delete().eq('user_id', userId),
           ]);
 
           // Import sprints
@@ -308,7 +345,7 @@ export const useTaskStore = create<TaskStore>()(
               .from('sprints')
               .insert([
                 {
-                  user_id: user.id,
+                  user_id: userId,
                   name: sprint.name,
                   start_date: sprint.start_date,
                   end_date: sprint.end_date,
@@ -323,7 +360,7 @@ export const useTaskStore = create<TaskStore>()(
 
           // Import tasks with new sprint IDs
           const tasksToInsert = data.tasks.map((task) => ({
-            user_id: user.id,
+            user_id: userId,
             sprint_id: sprintMap.get(task.sprint_id) || task.sprint_id,
             task: task.task,
             link: task.link,
@@ -342,8 +379,8 @@ export const useTaskStore = create<TaskStore>()(
 
           // Fetch updated data
           const [updatedSprints, updatedTasks] = await Promise.all([
-            fetchSprints(user.id),
-            fetchTasks(user.id),
+            fetchSprints(userId),
+            fetchTasks(userId),
           ]);
 
           set({ sprints: updatedSprints, tasks: updatedTasks });
@@ -354,6 +391,65 @@ export const useTaskStore = create<TaskStore>()(
           toast.error('Failed to import data: ' + error.message);
           throw error;
         }
+      },
+
+      // Setup realtime subscriptions
+      setupRealtimeSubscriptions: () => {
+        const userId = useAuthStore.getState().userId;
+        if (!userId) {
+          console.error('No userId available for subscriptions');
+          return;
+        }
+
+        // Subscribe to tasks changes
+        supabase
+          .channel('tasks-changes')
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: 'tasks',
+              filter: `user_id=eq.${userId}`,
+            },
+            async () => {
+              try {
+                const freshTasks = await fetchTasks(userId);
+                useTaskStore.setState((state) => ({
+                  ...state,
+                  tasks: freshTasks,
+                }));
+              } catch (error) {
+                console.error('Error fetching tasks on change:', error);
+              }
+            },
+          )
+          .subscribe();
+
+        // Subscribe to sprints changes
+        supabase
+          .channel('sprints-changes')
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: 'sprints',
+              filter: `user_id=eq.${userId}`,
+            },
+            async () => {
+              try {
+                const freshSprints = await fetchSprints(userId);
+                useTaskStore.setState((state) => ({
+                  ...state,
+                  sprints: freshSprints,
+                }));
+              } catch (error) {
+                console.error('Error fetching sprints on change:', error);
+              }
+            },
+          )
+          .subscribe();
       },
     }),
     {
@@ -366,79 +462,3 @@ export const useTaskStore = create<TaskStore>()(
     },
   ),
 );
-
-// Set up initial data fetch and real-time subscriptions
-supabase.auth.onAuthStateChange(async (_event, session) => {
-  if (session?.user) {
-    const userId = session.user.id;
-
-    const { tasks, sprints } = useTaskStore.getState();
-
-    // ✅ Only fetch when empty
-    if (tasks.length === 0 || sprints.length === 0) {
-      try {
-        const [freshTasks, freshSprints] = await Promise.all([
-          fetchTasks(userId),
-          fetchSprints(userId),
-        ]);
-        useTaskStore.setState({
-          tasks: freshTasks,
-          sprints: freshSprints,
-        });
-      } catch (error) {
-        console.error('Error fetching initial data:', error);
-      }
-    }
-
-    // Subscriptions stay same as before (no localStorage calls needed)
-    supabase
-      .channel('tasks-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'tasks',
-          filter: `user_id=eq.${userId}`,
-        },
-        async () => {
-          try {
-            const freshTasks = await fetchTasks(userId);
-            useTaskStore.setState((state) => ({
-              ...state,
-              tasks: freshTasks,
-            }));
-          } catch (error) {
-            console.error('Error fetching tasks on change:', error);
-          }
-        },
-      )
-      .subscribe();
-
-    supabase
-      .channel('sprints-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'sprints',
-          filter: `user_id=eq.${userId}`,
-        },
-        async () => {
-          try {
-            const freshSprints = await fetchSprints(userId);
-            useTaskStore.setState((state) => ({
-              ...state,
-              sprints: freshSprints,
-            }));
-          } catch (error) {
-            console.error('Error fetching sprints on change:', error);
-          }
-        },
-      )
-      .subscribe();
-  } else {
-    useTaskStore.setState({ tasks: [], sprints: [] });
-  }
-});

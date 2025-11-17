@@ -1,11 +1,10 @@
 'use client';
 
+import { Download, Moon, Sun, Upload } from 'lucide-react';
 import React, { useMemo } from 'react';
-import { Sun, Moon, Download, Upload } from 'lucide-react';
 import { useTaskStore } from '../store/taskStore';
 import type { FilterValue } from '../types';
 import { Button } from './ui/button';
-import { Select, SelectContent, SelectItem, SelectGroup, SelectLabel } from './ui/select';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -73,37 +72,37 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleDarkMode }) => {
       </div>
 
       <div className="flex items-center gap-2 md:gap-3 w-full md:w-auto">
-        <Select value={filterValue} onValueChange={handleFilterChange}>
-          <select
-            value={filterValue}
-            onChange={(e) => handleFilterChange(e.target.value)}
-            className="flex-1 md:flex-initial px-3 py-2 rounded-lg bg-background border border-input text-foreground text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            <option value="current_sprint">Current Sprint</option>
-            <option value="all_time">All Time</option>
-            {sprints.length > 0 && (
-              <>
-                <optgroup label="By Sprint">
-                  {sprints.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.name}
-                    </option>
-                  ))}
-                </optgroup>
-                <optgroup label="By Month">
-                  {monthOptions.map((m) => (
-                    <option key={m} value={m}>
-                      {new Date(m + '-02').toLocaleString('default', {
-                        month: 'long',
-                        year: 'numeric',
-                      })}
-                    </option>
-                  ))}
-                </optgroup>
-              </>
-            )}
-          </select>
-        </Select>
+        {/* <Select value={filterValue} onValueChange={handleFilterChange}> */}
+        <select
+          value={filterValue}
+          onChange={(e) => handleFilterChange(e.target.value)}
+          className="flex-1 md:flex-initial px-3 py-2 rounded-lg bg-background border border-input text-foreground text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring"
+        >
+          <option value="current_sprint">Current Sprint</option>
+          <option value="all_time">All Time</option>
+          {sprints.length > 0 && (
+            <>
+              <optgroup label="By Sprint">
+                {sprints.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="By Month">
+                {monthOptions.map((m) => (
+                  <option key={m} value={m}>
+                    {new Date(m + '-02').toLocaleString('default', {
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </option>
+                ))}
+              </optgroup>
+            </>
+          )}
+        </select>
+        {/* </Select> */}
 
         <Button
           variant="ghost"

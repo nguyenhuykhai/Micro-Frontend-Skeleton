@@ -11,17 +11,21 @@ import TaskTable from './components/TaskTable';
 import { Button } from './components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
+import { useAuthStore } from './store/authStore';
 import { useTaskStore } from './store/taskStore';
 import type { Task } from './types';
 
 type View = 'dashboard' | 'sprints';
 
 const App: React.FC = () => {
-  // Global variables
-  const { tasks, sprints, filterValue } = useTaskStore();
+  // Auth store
+  const { isAuthenticated, initializeAuth } = useAuthStore();
+
+  // Task store
+  const { tasks, sprints, filterValue, loadTasks, loadSprints, setupRealtimeSubscriptions } =
+    useTaskStore();
 
   // Local variables
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [view, setView] = useState<View>('dashboard');
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
@@ -68,6 +72,21 @@ const App: React.FC = () => {
   }, [tasks, sprints, filterValue]);
 
   // Effects
+  // Initialize auth on mount
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
+
+  // Load data and setup subscriptions when user is authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadTasks();
+      loadSprints();
+      setupRealtimeSubscriptions();
+    }
+  }, [isAuthenticated, loadTasks, loadSprints, setupRealtimeSubscriptions]);
+
+  // Handle dark mode
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -79,7 +98,7 @@ const App: React.FC = () => {
   }, [isDarkMode]);
 
   if (!isAuthenticated) {
-    return <GoogleAuth onAuthSuccess={() => setIsAuthenticated(true)} />;
+    return <GoogleAuth onAuthSuccess={() => {}} />;
   }
 
   return (

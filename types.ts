@@ -31,18 +31,24 @@ export interface Task {
   created_at: string;
   updated_at: string;
 }
+
 export type FilterValue = 'current_sprint' | 'all_time' | string;
 
 export interface TaskStore {
   tasks: Task[] | [];
   sprints: Sprint[] | [];
   filterValue: FilterValue;
-  addTask: (task: Omit<Task, 'id'>) => void;
-  updateTask: (task: Task) => void;
-  deleteTask: (id: string) => void;
-  addSprint: (sprint: Omit<Sprint, 'id'>) => Promise<Sprint>;
-  updateSprint: (sprint: Sprint) => void;
-  deleteSprint: (id: string) => void;
+  loadTasks: () => Promise<void>;
+  loadSprints: () => Promise<void>;
+  addTask: (task: Omit<Task, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => Promise<void>;
+  updateTask: (task: Task) => Promise<void>;
+  deleteTask: (id: string) => Promise<void>;
+  addSprint: (
+    sprint: Omit<Sprint, 'id' | 'user_id' | 'created_at' | 'updated_at'>,
+  ) => Promise<Sprint>;
+  updateSprint: (sprint: Sprint) => Promise<void>;
+  deleteSprint: (id: string) => Promise<void>;
   setFilterValue: (filter: FilterValue) => void;
-  importData: (data: { tasks: Task[]; sprints: Sprint[] }) => void;
+  importData: (data: { tasks: Task[]; sprints: Sprint[] }) => Promise<void>;
+  setupRealtimeSubscriptions: () => void;
 }

@@ -17,6 +17,7 @@ import {
 } from './ui/dialog';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { useAuthStore } from '@/store/authStore';
 
 interface TaskFormModalProps {
   isOpen: boolean;
