@@ -37,19 +37,18 @@ const transformSprint = (s: any): Sprint => ({
 });
 
 // Helper function to fetch all tasks
-const fetchTasks = async (userId: string) => {
-  const { data, error } = await supabase.from('tasks').select('*').eq('user_id', userId);
+const fetchTasks = async () => {
+  const { data, error } = await supabase.from('tasks').select('*');
 
   if (error) throw error;
   return data ? data.map(transformTask) : [];
 };
 
 // Helper function to fetch all sprints
-const fetchSprints = async (userId: string) => {
+const fetchSprints = async () => {
   const { data, error } = await supabase
     .from('sprints')
     .select('*')
-    .eq('user_id', userId)
     .order('start_date', { ascending: false });
 
   if (error) throw error;
@@ -61,17 +60,19 @@ export const useTaskStore = create<TaskStore>()(
     (set, get) => ({
       tasks: [],
       sprints: [],
-      filterValue: 'current_sprint',
+      filterValue: 'all_time',
 
       loadTasks: async () => {
-        const userId = useAuthStore.getState().userId;
-        if (!userId) {
-          console.error('No userId available');
-          return;
+        try {
+          const tasks = await fetchTasks();
+          set({ tasks });
+        } catch (error) {
+          console.error('Failed to load tasks:', error);
+          toast.error('Failed to load tasks');
         }
 
         try {
-          const tasks = await fetchTasks(userId);
+          const tasks = await fetchTasks();
           set({ tasks });
         } catch (error) {
           console.error('Failed to load tasks:', error);
@@ -80,15 +81,8 @@ export const useTaskStore = create<TaskStore>()(
       },
 
       loadSprints: async () => {
-        const userId = useAuthStore.getState().userId;
-        if (!userId) {
-          console.error('No userId available');
-          return;
-        }
-
         try {
-          const sprints = await fetchSprints(userId);
-          console.log('🚀 ~ sprints:', sprints);
+          const sprints = await fetchSprints();
           set({ sprints });
         } catch (error) {
           console.error('Failed to load sprints:', error);
@@ -378,10 +372,7 @@ export const useTaskStore = create<TaskStore>()(
           if (tasksError) throw tasksError;
 
           // Fetch updated data
-          const [updatedSprints, updatedTasks] = await Promise.all([
-            fetchSprints(userId),
-            fetchTasks(userId),
-          ]);
+          const [updatedSprints, updatedTasks] = await Promise.all([fetchSprints(), fetchTasks()]);
 
           set({ sprints: updatedSprints, tasks: updatedTasks });
 
@@ -410,11 +401,10 @@ export const useTaskStore = create<TaskStore>()(
               event: '*',
               schema: 'public',
               table: 'tasks',
-              filter: `user_id=eq.${userId}`,
             },
             async () => {
               try {
-                const freshTasks = await fetchTasks(userId);
+                const freshTasks = await fetchTasks();
                 useTaskStore.setState((state) => ({
                   ...state,
                   tasks: freshTasks,
@@ -435,11 +425,10 @@ export const useTaskStore = create<TaskStore>()(
               event: '*',
               schema: 'public',
               table: 'sprints',
-              filter: `user_id=eq.${userId}`,
             },
             async () => {
               try {
-                const freshSprints = await fetchSprints(userId);
+                const freshSprints = await fetchSprints();
                 useTaskStore.setState((state) => ({
                   ...state,
                   sprints: freshSprints,
