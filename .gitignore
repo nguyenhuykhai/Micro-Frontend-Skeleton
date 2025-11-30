@@ -1,24 +1,70 @@
-bun.lockb
+# Package managers & locks
 node_modules/
-dist/
-.next/
-.out/
+**/node_modules/
+bun.lockb
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
 
-.env*
+# Build outputs & caches
+dist/
+**/dist/
+build/
+**/build/
+.out/
+**/.out/
+.next/
+**/.next/
+.cache/
+**/.cache/
+.vercel/
+**/.vercel/
+.netlify/
+**/.netlify/
+.turbo/
+**/.turbo/
+.rspack/
+**/.rspack/
+.rsbuild/
+**/.rsbuild/
+.rspack-profile-*/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
 !.env.example
 
-.cache/
-.vercel
-.netlify
-
+# Logs & debug
+*.log
+*.log*
 npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
 bun-debug.log*
 
-.idea/
-.vscode/
-*.swp
-*.swo
+# OS & Editor junk
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*.sublime-*
+*.local
+
+# IDEs
+.idea/
+**/.idea/
+.vscode/
+**/.vscode/
+!.vscode/extensions.json
+
+# TypeScript
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# Optional: keep if you commit them
+# !.env.example
+# !.env.production
