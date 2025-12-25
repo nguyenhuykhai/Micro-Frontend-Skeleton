@@ -25,13 +25,13 @@ graph TB
     B --> |Exposes Button| A
     A --> |Exposes NotFound| B
 
-    A --> C[@repo/core]
-    A --> D[@repo/ui]
+    A --> C
+    A --> D
     B --> C
     B --> D
 
-    C[Event Bus, Services, Hooks]
-    D[UI Components, Tailwind]
+    C[@repo/core: Event Bus, Services, Hooks]
+    D[@repo/ui: Components, Tailwind]
 ```
 
 ## 📁 Monorepo Structure
