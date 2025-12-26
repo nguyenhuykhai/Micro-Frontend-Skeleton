@@ -15,3 +15,6 @@ export * from "./components/sheet";
 export * from "./components/sidebar";
 export * from "./components/skeleton";
 export * from "./components/tooltip";
+
+// DevTools
+export * from "./devtools/EventDebugger";

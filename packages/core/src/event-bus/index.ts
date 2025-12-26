@@ -1,9 +1,5 @@
 import type { ModalPayload, NotificationPayload, ThemePayload } from "../types";
 
-/**
- * Registry tập trung để quản lý toàn bộ Event trong hệ thống.
- * Giúp mở rộng dễ dàng: Chỉ cần thêm cặp 'key: payload' vào đây.
- */
 export interface AppEventMap {
   "notification:show": NotificationPayload;
   "theme:change": ThemePayload;

@@ -33,6 +33,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.555.0",
     "motion": "^12.23.25",
+    "react-json-view": "^1.21.3",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

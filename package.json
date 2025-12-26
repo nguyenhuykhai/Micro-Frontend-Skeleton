@@ -8,6 +8,7 @@
     "dev": "pnpm --parallel --filter \"@repo/*\" dev",
     "dev:mfe1": "pnpm --filter @repo/mfe1 dev",
     "dev:mfe2": "pnpm --filter @repo/mfe2 dev",
+    "preview": "pnpm --parallel --filter \"@repo/*\" preview",
     "build": "pnpm --recursive --filter \"@repo/*\" build",
     "build:mfe1": "pnpm --filter @repo/mfe1 build",
     "build:mfe2": "pnpm --filter @repo/mfe2 build",
