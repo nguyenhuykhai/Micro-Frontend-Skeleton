@@ -1,4 +1,4 @@
-import { LoaderTwo } from "@repo/ui/components/loader";
+import { LoaderTwo } from "@repo/ui";
 
 const LoadingContent = () => {
   return (

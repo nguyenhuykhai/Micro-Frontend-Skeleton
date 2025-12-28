@@ -18,6 +18,9 @@
     "@module-federation/runtime": "^0.21.6",
     "@repo/core": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@tailwindcss/cli": "^4.1.17",
+    "@tailwindcss/postcss": "^4.1.17",
+    "postcss-loader": "^8.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.10.1",
@@ -28,6 +31,10 @@
     "@rsbuild/plugin-react": "^1.4.2",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
+    "autoprefixer": "10",
+    "postcss": "8",
+    "tailwindcss": "^3.4.14",
+    "tailwindcss-animate": "1",
     "typescript": "^5.9.3"
   }
 }

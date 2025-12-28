@@ -1,4 +1,4 @@
-import { ScrollArea } from "../../components/scroll-area";
+import { ScrollArea } from "../../components/ui/scroll-area";
 import { EventItem } from "./EventItem";
 import { EmptyState } from "./EmptyState";
 import type { EventListProps } from "../types";

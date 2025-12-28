@@ -1,8 +1,14 @@
 import animate from "tailwindcss-animate";
+import type { Config } from "tailwindcss";
 
-export default {
+const createConfig = (options?: {
+  prefix?: string;
+  important?: string;
+}): Config => ({
   darkMode: ["class"],
-  content: [], // Apps sẽ scan UI components, không cần config ở đây
+  prefix: options?.prefix || "",
+  important: options?.important, // Will be used for scoping
+  content: [],
   theme: {
     container: {
       center: true,
@@ -62,36 +68,20 @@ export default {
           "66%": { top: "20px" },
         },
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
         "collapsible-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-collapsible-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-collapsible-content-height)" },
         },
         "collapsible-up": {
-          from: {
-            height: "var(--radix-collapsible-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-collapsible-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -104,4 +94,7 @@ export default {
     },
   },
   plugins: [animate],
-};
+});
+
+export default createConfig();
+export { createConfig };

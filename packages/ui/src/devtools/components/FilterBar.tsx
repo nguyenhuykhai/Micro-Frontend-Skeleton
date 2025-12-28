@@ -1,6 +1,6 @@
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { Badge } from "../../components/badge";
-import { Button } from "../../components/button";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
 import { EVENT_CATEGORIES, CATEGORY_LABELS } from "../constants";
 import type { FilterBarProps, CategoryKey } from "../types";
 

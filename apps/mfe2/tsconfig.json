@@ -5,7 +5,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "host/*": ["./src/types/host.d.ts"],
       "@repo/core": ["../../packages/core/src"],
       "@repo/core/*": ["../../packages/core/src/*"],
       "@repo/ui": ["../../packages/ui/src"],

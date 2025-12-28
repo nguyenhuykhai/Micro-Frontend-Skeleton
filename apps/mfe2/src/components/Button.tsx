@@ -1,7 +1,8 @@
 import React from "react";
 import { publishEvent } from "@repo/core/event-bus";
+import { Button } from "@repo/ui";
 
-const Button: React.FC = () => {
+const RemoteButton: React.FC = () => {
   const triggerSuccess = () => {
     publishEvent("notification:show", {
       title: "Thành công!",
@@ -12,19 +13,14 @@ const Button: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Remote Button Component</h2>
-      <button
-        style={{ padding: "10px 20px", fontSize: "16px" }}
-        onClick={triggerSuccess}
-      >
-        Click me from Remote!
-      </button>
-      <p style={{ fontSize: "12px", color: "green" }}>
+    <div className="p-4">
+      <h2 className="text-lg font-bold mb-2">Remote Button Component</h2>
+      <Button onClick={triggerSuccess}>Click me from Remote!</Button>
+      <p className="text-xs text-green-600 mt-2">
         ✓ Connected to host - Notification service ready
       </p>
     </div>
   );
 };
 
-export default Button;
+export default RemoteButton;

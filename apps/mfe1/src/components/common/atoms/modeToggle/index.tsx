@@ -1,12 +1,12 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 
-import { Button } from "@repo/ui/components/button";
+import { Button } from "@repo/ui";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
   TooltipProvider,
-} from "@repo/ui/components/tooltip";
+} from "@repo/ui";
 import { useTheme } from "@/components/providers/theme-provider";
 
 export function ModeToggle() {

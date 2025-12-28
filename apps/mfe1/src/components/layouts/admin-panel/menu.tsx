@@ -4,15 +4,15 @@ import { useLocation } from "react-router-dom";
 
 import { cn } from "@repo/ui/lib/utils";
 import { getMenuList } from "@/constants/menu";
-import { Button } from "@repo/ui/components/button";
-import { ScrollArea } from "@repo/ui/components/scroll-area";
+import { Button } from "@repo/ui";
+import { ScrollArea } from "@repo/ui";
 import { CollapseMenuButton } from "@/components/layouts/admin-panel/collapse-menu-button";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@repo/ui/components/tooltip";
+} from "@repo/ui";
 
 interface MenuProps {
   isOpen: boolean | undefined;

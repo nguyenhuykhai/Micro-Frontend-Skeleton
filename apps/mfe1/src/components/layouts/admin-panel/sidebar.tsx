@@ -1,6 +1,6 @@
 import { Menu } from "@/components/layouts/admin-panel/menu";
 import { SidebarToggle } from "@/components/layouts/admin-panel/sidebar-toggle";
-import { Button } from "@repo/ui/components/button";
+import { Button } from "@repo/ui";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
 import { cn } from "@repo/ui/lib/utils";

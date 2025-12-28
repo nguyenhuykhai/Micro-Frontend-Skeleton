@@ -1,8 +1,9 @@
 import { useRef, useEffect } from "react";
 import { Search, X } from "lucide-react";
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { Input } from "../../components/input";
+
 import type { SearchBarProps } from "../types";
+import { Input } from "../../components/ui/input";
 
 export function SearchBar({
   searchTerm,

@@ -1,4 +1,4 @@
-import { SidebarProvider } from "@repo/ui/components/sidebar";
+import { SidebarProvider } from "@repo/ui";
 import { type ReactNode } from "react";
 import { Outlet } from "react-router";
 import AdminPanelLayout from "../admin-panel/admin-panel-layout";

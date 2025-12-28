@@ -2,12 +2,12 @@ import { ChevronDown, Dot, type LucideIcon } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 
-import { Button } from "@repo/ui/components/button";
+import { Button } from "@repo/ui";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@repo/ui/components/collapsible";
+} from "@repo/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,13 +15,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@repo/ui/components/dropdown-menu";
+} from "@repo/ui";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@repo/ui/components/tooltip";
+} from "@repo/ui";
 import { cn } from "@repo/ui/lib/utils";
 import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
 import { useLocation } from "react-router-dom";

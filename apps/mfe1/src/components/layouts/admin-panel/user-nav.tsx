@@ -1,14 +1,14 @@
 import { Link } from "react-router";
 import { LayoutGrid, LogOut, User } from "lucide-react";
 
-import { Button } from "@repo/ui/components/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/avatar";
+import { Button } from "@repo/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
   TooltipProvider,
-} from "@repo/ui/components/tooltip";
+} from "@repo/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@repo/ui/components/dropdown-menu";
+} from "@repo/ui";
 
 export function UserNav() {
   return (
