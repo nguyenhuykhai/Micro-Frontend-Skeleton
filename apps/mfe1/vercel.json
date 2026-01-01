@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm build:mfe1",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/((?!.*\\.).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
