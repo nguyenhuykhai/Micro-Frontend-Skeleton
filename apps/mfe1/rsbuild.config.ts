@@ -19,10 +19,10 @@ export default defineConfig({
     cors: true, // Add this
   },
   dev: {
-    assetPrefix: "http://localhost:3001", // Add this
+    assetPrefix: process.env.VITE_MFE1_BASE_URL || "http://localhost:3001",
   },
   output: {
-    assetPrefix: "http://localhost:3001", // Add this for production
+    assetPrefix: process.env.VITE_MFE1_BASE_URL || "http://localhost:3001",
   },
   plugins: [
     pluginReact(),
