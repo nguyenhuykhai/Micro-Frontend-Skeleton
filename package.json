@@ -15,6 +15,7 @@
     "build": "pnpm --recursive --filter \"@repo/*\" build",
     "build:mfe1": "pnpm --filter @repo/mfe1 build",
     "build:mfe2": "pnpm --filter @repo/mfe2 build",
+    "build:docs": "pnpm --filter @repo/docs build",
     "build:packages": "pnpm --filter \"./packages/*\" build",
     "clean": "pnpm --recursive exec rm -rf node_modules dist .turbo",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",

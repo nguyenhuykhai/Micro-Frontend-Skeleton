@@ -64,7 +64,6 @@ const DropdownMenuContent = React.forwardRef<
   const contextContainer = usePortalContainer();
   const portalContainer = container ?? contextContainer;
 
-  console.log("🚀 ~ portalContainer:", portalContainer);
   return (
     <DropdownMenuPrimitive.Portal container={portalContainer}>
       <DropdownMenuPrimitive.Content

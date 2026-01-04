@@ -13,6 +13,13 @@ const buildRemotes = () => {
 };
 
 export default defineConfig({
+  source: {
+    define: {
+      "import.meta.env.VITE_DOCS_BASE_URL": JSON.stringify(
+        process.env.VITE_DOCS_BASE_URL || "http://localhost:3000"
+      ),
+    },
+  },
   server: {
     port: 3001,
     host: "localhost", // Add this

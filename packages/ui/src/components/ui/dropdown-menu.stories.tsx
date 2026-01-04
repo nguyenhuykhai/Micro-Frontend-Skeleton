@@ -30,7 +30,6 @@ import {
   Settings,
   User,
   UserPlus,
-  Users,
 } from "lucide-react";
 import * as React from "react";
 
