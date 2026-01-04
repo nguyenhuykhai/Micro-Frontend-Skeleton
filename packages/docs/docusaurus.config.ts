@@ -63,6 +63,11 @@ const config: Config = {
     navbar: {
       title: "Docs",
       hideOnScroll: true,
+      logo: {
+        alt: "Micro Frontend Skeleton Logo",
+        src: "img/logo.svg",
+        href: "/intro",
+      },
       items: [],
     },
     prism: {
