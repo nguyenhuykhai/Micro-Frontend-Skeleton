@@ -27,7 +27,7 @@ import * as React from "react";
  * use this container without needing to pass `container` prop manually.
  */
 export const PortalContainerContext = React.createContext<HTMLElement | null>(
-  null
+  null,
 );
 
 /**

@@ -85,9 +85,9 @@ const Home = () => {
         <div className="p-6">
           <div className="space-y-4">
             {tasks.length > 0 ? (
-              tasks.map((task) => (
+              tasks.map((task, index) => (
                 <div
-                  key={task.id}
+                  key={index}
                   className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/5 transition-colors gap-4"
                 >
                   <div className="flex-1 min-w-0">
@@ -114,7 +114,7 @@ const Home = () => {
                       onChange={(e) =>
                         updateTaskStatus(
                           task.id,
-                          e.target.value as Task["status"]
+                          e.target.value as Task["status"],
                         )
                       }
                       className={`px-3 py-1 rounded-full text-xs font-medium border cursor-pointer ${
@@ -133,7 +133,7 @@ const Home = () => {
                       onClick={() => {
                         if (
                           confirm(
-                            `Bạn có chắc chắn muốn xóa nhiệm vụ "${task.title}"?`
+                            `Bạn có chắc chắn muốn xóa nhiệm vụ "${task.title}"?`,
                           )
                         ) {
                           deleteTask(task.id);

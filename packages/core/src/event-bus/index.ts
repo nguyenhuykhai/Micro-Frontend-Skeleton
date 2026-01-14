@@ -1,15 +1,25 @@
-import type { ModalPayload, NotificationPayload, ThemePayload } from "../types";
+import type {
+  ModalPayload,
+  NotificationPayload,
+  ThemePayload,
+  TaskCreatedPayload,
+  TaskUpdatedPayload,
+  TaskDeletedPayload,
+} from "../types";
 
 export interface AppEventMap {
   "notification:show": NotificationPayload;
   "theme:change": ThemePayload;
   "modal:open": ModalPayload;
   "user:session-expired": { reason: string };
+  "task:created": TaskCreatedPayload;
+  "task:updated": TaskUpdatedPayload;
+  "task:deleted": TaskDeletedPayload;
 }
 
 export const publishEvent = <K extends keyof AppEventMap>(
   event: K,
-  detail: AppEventMap[K]
+  detail: AppEventMap[K],
 ) => {
   const customEvent = new CustomEvent(event, {
     detail,
@@ -21,7 +31,7 @@ export const publishEvent = <K extends keyof AppEventMap>(
 
 export const subscribeEvent = <K extends keyof AppEventMap>(
   event: K,
-  callback: (detail: AppEventMap[K]) => void
+  callback: (detail: AppEventMap[K]) => void,
 ) => {
   const handler = (e: Event) => {
     const customEvent = e as CustomEvent<AppEventMap[K]>;

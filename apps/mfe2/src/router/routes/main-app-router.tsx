@@ -7,7 +7,7 @@ import { withLazyLoading } from "../router-helper";
 const AppLayout = lazy(() => import("@/components/layouts/app-layout"));
 const NotFound = lazy(() => import("@/components/common/templates/NotFound"));
 const NotHavePermission = lazy(
-  () => import("@/components/common/templates/NotHavePermission")
+  () => import("@/components/common/templates/NotHavePermission"),
 );
 
 const MainAppRoutes = () => {

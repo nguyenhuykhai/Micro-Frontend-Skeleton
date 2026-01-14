@@ -21,7 +21,7 @@ export const highlightText = (text: string, search: string) => {
 
   const regex = new RegExp(
     `(${search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-    "gi"
+    "gi",
   );
   const parts = text.split(regex);
 
@@ -32,6 +32,6 @@ export const highlightText = (text: string, search: string) => {
       </mark>
     ) : (
       part
-    )
+    ),
   );
 };

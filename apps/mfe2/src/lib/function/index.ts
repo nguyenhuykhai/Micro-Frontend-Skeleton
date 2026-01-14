@@ -1,7 +1,7 @@
 import type { IPermission } from "@/types";
 
 export const checkPermissions = (
-  permissions: IPermission | IPermission[] | boolean
+  permissions: IPermission | IPermission[] | boolean,
 ): boolean => {
   // Stub implementation - customize based on your permission logic
   if (typeof permissions === "boolean") {

@@ -66,7 +66,7 @@ export function Menu({ isOpen }: MenuProps) {
                               className={cn(
                                 "w-full justify-start h-10 mb-1 hover:bg-accent dark:hover:bg-zinc-500",
                                 isOpen === false && "-translate-x-96 opacity-0",
-                                active && "dark:hover:bg-gray-100"
+                                active && "dark:hover:bg-gray-100",
                               )}
                               asChild
                             >
@@ -79,7 +79,7 @@ export function Menu({ isOpen }: MenuProps) {
                                     className={cn(
                                       "text-gray-950 dark:text-gray-100",
                                       active &&
-                                        "text-gray-950 dark:text-gray-950"
+                                        "text-gray-950 dark:text-gray-950",
                                     )}
                                   />
                                 </span>
@@ -89,7 +89,8 @@ export function Menu({ isOpen }: MenuProps) {
                                     isOpen === false
                                       ? "-translate-x-96 opacity-0"
                                       : "translate-x-0 opacity-100",
-                                    active && "text-gray-950 dark:text-gray-950"
+                                    active &&
+                                      "text-gray-950 dark:text-gray-950",
                                   )}
                                 >
                                   {label}
@@ -119,7 +120,7 @@ export function Menu({ isOpen }: MenuProps) {
                         isOpen={isOpen}
                       />
                     </div>
-                  )
+                  ),
               )}
             </li>
           ))}
@@ -138,7 +139,7 @@ export function Menu({ isOpen }: MenuProps) {
                     <p
                       className={cn(
                         "whitespace-nowrap text-foreground",
-                        isOpen === false ? "opacity-0 hidden" : "opacity-100"
+                        isOpen === false ? "opacity-0 hidden" : "opacity-100",
                       )}
                     >
                       Sign out

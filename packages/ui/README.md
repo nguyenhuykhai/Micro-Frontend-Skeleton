@@ -157,7 +157,7 @@ const mfe1Container = document.getElementById("mfe1-root");
 root.render(
   <PortalContainerProvider container={mfe1Container}>
     <App />
-  </PortalContainerProvider>
+  </PortalContainerProvider>,
 );
 ```
 

@@ -9,7 +9,7 @@ const DocsPage = lazy(() => import("@/pages/DocsPage"));
 const AppLayout = lazy(() => import("@/components/layouts/app-layout"));
 const NotFound = lazy(() => import("@/components/common/templates/NotFound"));
 const NotHavePermission = lazy(
-  () => import("@/components/common/templates/NotHavePermission")
+  () => import("@/components/common/templates/NotHavePermission"),
 );
 
 export const MainAppRoutes = () => {

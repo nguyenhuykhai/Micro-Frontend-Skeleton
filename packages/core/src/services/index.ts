@@ -1,1 +1,4 @@
-export { NotificationService, notificationService } from "./notification-service";
+export {
+  NotificationService,
+  notificationService,
+} from "./notification-service";

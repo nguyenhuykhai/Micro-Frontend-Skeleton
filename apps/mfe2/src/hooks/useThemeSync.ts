@@ -16,9 +16,6 @@ export const useThemeSync = () => {
   const applyTheme = (newTheme: Theme) => {
     const mfe2Root = document.getElementById("mfe2-root");
 
-    console.log("🎨 Applying theme:", newTheme);
-    console.log("🎯 Target element:", mfe2Root);
-
     if (mfe2Root) {
       if (newTheme === "dark") {
         mfe2Root.classList.add("dark");

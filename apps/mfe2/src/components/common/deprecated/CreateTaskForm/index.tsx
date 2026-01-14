@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { Button, DatePicker } from "@repo/ui";
 import { useTasks } from "@/contexts/TaskContext";
 import type { CreateTaskInput } from "@/types/task";
 import { publishEvent } from "@repo/core";
+import { Button, DatePicker } from "@repo/ui";
 import { format } from "date-fns";
+import { useState } from "react";
 
-const CreateTaskForm = () => {
+export interface CreateTaskFormProps {
+  header?: string;
+}
+
+const CreateTaskForm = ({ header }: CreateTaskFormProps) => {
   const { createTask } = useTasks();
   const [formData, setFormData] = useState<CreateTaskInput>({
     title: "",
@@ -64,7 +68,7 @@ const CreateTaskForm = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -76,7 +80,7 @@ const CreateTaskForm = () => {
   return (
     <div className="rounded-lg border bg-card shadow-sm">
       <div className="p-6 border-b bg-muted/30">
-        <h2 className="text-xl font-semibold">Tạo nhiệm vụ</h2>
+        <h2 className="text-xl font-semibold">{header || "Tạo nhiệm vụ"}</h2>
         <p className="text-sm text-muted-foreground mt-1">
           Thêm một nhiệm vụ mới vào danh sách nhiệm vụ của bạn
         </p>

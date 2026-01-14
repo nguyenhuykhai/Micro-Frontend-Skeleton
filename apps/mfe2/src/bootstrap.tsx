@@ -10,7 +10,7 @@ const mount = (el: HTMLElement) => {
       <AppProvider>
         <App />
       </AppProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
   );
   return root;
 };

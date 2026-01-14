@@ -16,7 +16,7 @@ export default defineConfig({
   source: {
     define: {
       "import.meta.env.VITE_DOCS_BASE_URL": JSON.stringify(
-        process.env.VITE_DOCS_BASE_URL || "http://localhost:3000"
+        process.env.VITE_DOCS_BASE_URL || "http://localhost:3000",
       ),
     },
   },

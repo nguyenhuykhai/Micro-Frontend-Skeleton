@@ -75,7 +75,7 @@ const Detail = () => {
                       onChange={(e) =>
                         updateTaskStatus(
                           task.id,
-                          e.target.value as Task["status"]
+                          e.target.value as Task["status"],
                         )
                       }
                       className={`px-3 py-1 rounded-full text-xs font-medium border cursor-pointer ${
@@ -92,7 +92,7 @@ const Detail = () => {
                       onClick={() => {
                         if (
                           confirm(
-                            `Bạn có chắc chắn muốn xóa nhiệm vụ "${task.title}"?`
+                            `Bạn có chắc chắn muốn xóa nhiệm vụ "${task.title}"?`,
                           )
                         ) {
                           deleteTask(task.id);

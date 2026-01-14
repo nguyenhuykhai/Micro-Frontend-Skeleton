@@ -1,4 +1,5 @@
 import { ModeToggle } from "@/components/common/atoms/modeToggle";
+import TaskSideSheet from "@/components/common/deprecated/createTaskForm";
 import { SheetMenu } from "@/components/layouts/admin-panel/sheet-menu";
 import { UserNav } from "@/components/layouts/admin-panel/user-nav";
 
@@ -19,6 +20,10 @@ export function Navbar({ title }: NavbarProps) {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* Assuming ModeToggle is handled, just spacing */}
           </div>
+
+          {/* Create Task Button */}
+          <TaskSideSheet />
+
           <ModeToggle />
           <UserNav />
         </div>

@@ -24,3 +24,29 @@ export interface ModalPayload {
   onConfirm?: () => void;
   onCancel?: () => void;
 }
+
+// Task types for cross-app synchronization
+export interface Task {
+  id: number;
+  title: string;
+  status: "todo" | "in-progress" | "completed";
+  priority: "low" | "medium" | "high";
+  assignee: string;
+  dueDate: string;
+}
+
+export interface TaskCreatedPayload {
+  task: Task;
+  sourceInstanceId: string;
+}
+
+export interface TaskUpdatedPayload {
+  taskId: number;
+  status: Task["status"];
+  sourceInstanceId: string;
+}
+
+export interface TaskDeletedPayload {
+  taskId: number;
+  sourceInstanceId: string;
+}

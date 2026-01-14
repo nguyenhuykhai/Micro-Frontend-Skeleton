@@ -21,6 +21,8 @@ export default defineConfig({
       name: "remote",
       exposes: {
         "./RemoteApp": "./src/apps/main-app",
+        "./CreateTaskFormWithProvider":
+          "./src/components/common/deprecated/CreateTaskForm/CreateTaskFormWithProvider.tsx",
       },
       filename: "remoteEntry.js",
       shared: {

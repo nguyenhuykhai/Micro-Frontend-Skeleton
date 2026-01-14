@@ -187,19 +187,19 @@ import { notificationService } from "@repo/core";
 // Success notification
 notificationService.success(
   "Upload Complete",
-  "Your file has been uploaded successfully"
+  "Your file has been uploaded successfully",
 );
 
 // Error notification
 notificationService.error(
   "Upload Failed",
-  "There was an error uploading your file"
+  "There was an error uploading your file",
 );
 
 // Warning notification
 notificationService.warning(
   "Session Expiring",
-  "Your session will expire in 5 minutes"
+  "Your session will expire in 5 minutes",
 );
 
 // Info notification

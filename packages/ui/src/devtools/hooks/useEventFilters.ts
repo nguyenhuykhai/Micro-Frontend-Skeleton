@@ -6,7 +6,7 @@ import { getEventCategory } from "../utils";
 export function useEventFilters(logs: EventLog[]) {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilters, setActiveFilters] = useState<Set<CategoryKey>>(
-    new Set()
+    new Set(),
   );
 
   const filteredLogs = useMemo(() => {
@@ -18,7 +18,7 @@ export function useEventFilters(logs: EventLog[]) {
         (log) =>
           log.eventName.toLowerCase().includes(term) ||
           log.origin?.toLowerCase().includes(term) ||
-          JSON.stringify(log.payload).toLowerCase().includes(term)
+          JSON.stringify(log.payload).toLowerCase().includes(term),
       );
     }
 
