@@ -3,6 +3,11 @@
   "installCommand": "pnpm install --no-frozen-lockfile",
   "buildCommand": "cd ../.. && pnpm install --no-frozen-lockfile && pnpm build:mfe1",
   "outputDirectory": "dist",
+  "git": {
+    "deploymentEnabled": {
+      "master": true
+    }
+  },
   "rewrites": [
     {
       "source": "/((?!.*\\.).*)",

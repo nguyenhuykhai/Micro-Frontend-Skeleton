@@ -3,6 +3,11 @@
   "installCommand": "pnpm install --no-frozen-lockfile",
   "buildCommand": "cd ../.. && pnpm install --no-frozen-lockfile && pnpm build:docs",
   "outputDirectory": "build",
+  "git": {
+    "deploymentEnabled": {
+      "master": true
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",

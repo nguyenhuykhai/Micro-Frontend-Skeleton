@@ -4,11 +4,10 @@ on:
   pull_request:
     branches:
       - master
-      - "test/ci-workflow"
+
   push:
     branches:
       - master
-      - "test/ci-workflow"
 
 # Cancel in-progress runs for the same workflow and branch
 concurrency:
