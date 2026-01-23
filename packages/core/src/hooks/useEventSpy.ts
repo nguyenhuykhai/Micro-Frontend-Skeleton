@@ -23,6 +23,9 @@ export const useEventSpy = (options: UseEventSpyOptions = {}) => {
       "theme:change",
       "modal:open",
       "user:session-expired",
+      "task:created",
+      "task:updated",
+      "task:deleted",
     ];
 
     const handlers: Array<{ event: string; handler: EventListener }> = [];

@@ -14,7 +14,10 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "lint": "echo 'Skipping lint for docs package'",
+    "format": "prettier --write \"docs/**/*.{md,mdx}\"",
+    "format:check": "prettier --check \"docs/**/*.{md,mdx}\""
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
