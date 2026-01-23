@@ -12,7 +12,7 @@ export const withLazyLoading = (Component: React.ComponentType) => {
 };
 
 export const withLazyLoadingPermission = (
-  Component: any,
+  Component: React.ComponentType,
   permissions?: IPermission | IPermission[] | boolean,
 ) => {
   return (

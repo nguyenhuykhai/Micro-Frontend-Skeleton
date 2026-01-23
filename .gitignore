@@ -68,3 +68,6 @@ Thumbs.db
 # Optional: keep if you commit them
 # !.env.example
 # !.env.production
+
+# Agent
+.agent
