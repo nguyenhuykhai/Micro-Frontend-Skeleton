@@ -9,6 +9,7 @@
     "dev:mfe1": "pnpm --filter @repo/mfe1 dev",
     "dev:mfe2": "pnpm --filter @repo/mfe2 dev",
     "dev:docs": "pnpm --filter @repo/docs dev",
+    "dev:focushive": "pnpm --filter @repo/focushive dev",
     "predev": "pnpm stop",
     "stop": "kill-port 3000 3001 3002",
     "preview": "pnpm --parallel --filter \"@repo/*\" preview",

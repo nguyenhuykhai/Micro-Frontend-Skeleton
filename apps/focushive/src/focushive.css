@@ -1,0 +1,75 @@
+/* Base styles with design tokens from Figma */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#focushive-root {
+  /* CSS Variables - Design Tokens */
+
+  /* Colors */
+  --focushive-bg-primary: #231c0f;
+  --focushive-bg-secondary: rgba(255, 255, 255, 0.05);
+  --focushive-border: rgba(255, 255, 255, 0.1);
+  --focushive-text-primary: #ffffff;
+  --focushive-text-secondary: rgba(255, 255, 255, 0.7);
+  --focushive-text-tertiary: rgba(255, 255, 255, 0.5);
+  --focushive-accent: #3b82f6;
+  --focushive-accent-hover: #2563eb;
+
+  /* Spacing */
+  --focushive-spacing-xs: 4px;
+  --focushive-spacing-sm: 8px;
+  --focushive-spacing-md: 16px;
+  --focushive-spacing-lg: 24px;
+  --focushive-spacing-xl: 32px;
+
+  /* Border Radius */
+  --focushive-radius-sm: 4px;
+  --focushive-radius-md: 8px;
+  --focushive-radius-lg: 12px;
+  --focushive-radius-xl: 16px;
+  --focushive-radius-full: 9999px;
+
+  /* Effects */
+  --focushive-blur: 12px;
+  --focushive-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --focushive-shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Typography */
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  color: var(--focushive-text-primary);
+  background: var(--focushive-bg-primary);
+}
+
+/* Glassmorphism utility */
+@layer components {
+  .glass-panel {
+    background: var(--focushive-bg-secondary);
+    backdrop-filter: blur(var(--focushive-blur));
+    -webkit-backdrop-filter: blur(var(--focushive-blur));
+    border: 1px solid var(--focushive-border);
+    box-shadow: var(--focushive-shadow);
+  }
+
+  .glass-panel-lg {
+    background: var(--focushive-bg-secondary);
+    backdrop-filter: blur(var(--focushive-blur));
+    -webkit-backdrop-filter: blur(var(--focushive-blur));
+    border: 1px solid var(--focushive-border);
+    box-shadow: var(--focushive-shadow-lg);
+  }
+}
+
+/* Reset and base styles */
+#focushive-root * {
+  box-sizing: border-box;
+}
+
+#focushive-root {
+  min-height: 100vh;
+  width: 100%;
+}

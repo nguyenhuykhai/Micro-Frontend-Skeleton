@@ -28,6 +28,103 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/focushive:
+    dependencies:
+      '@module-federation/bridge-react':
+        specifier: ^0.21.6
+        version: 0.21.6(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-router@7.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@module-federation/enhanced':
+        specifier: ^0.21.6
+        version: 0.21.6(@rspack/core@1.6.8(@swc/helpers@0.5.18))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(webpack@5.104.1)
+      '@module-federation/retry-plugin':
+        specifier: ^0.21.6
+        version: 0.21.6
+      '@module-federation/rsbuild-plugin':
+        specifier: ^0.21.6
+        version: 0.21.6(@rsbuild/core@1.6.15)(@rspack/core@1.6.8(@swc/helpers@0.5.18))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(webpack@5.104.1)
+      '@module-federation/runtime':
+        specifier: ^0.21.6
+        version: 0.21.6
+      '@repo/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@tailwindcss/cli':
+        specifier: ^4.1.17
+        version: 4.1.18
+      '@tailwindcss/postcss':
+        specifier: ^4.1.17
+        version: 4.1.18
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      postcss-loader:
+        specifier: ^8.2.0
+        version: 8.2.0(@rspack/core@1.6.8(@swc/helpers@0.5.18))(postcss@8.5.6)(typescript@5.9.3)(webpack@5.104.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      react-router:
+        specifier: ^7.10.1
+        version: 7.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-router-dom:
+        specifier: ^6.30.2
+        version: 6.30.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@eslint/js':
+        specifier: ^9.19.0
+        version: 9.39.2
+      '@rsbuild/core':
+        specifier: ^1.6.7
+        version: 1.6.15
+      '@rsbuild/plugin-react':
+        specifier: ^1.4.2
+        version: 1.4.2(@rsbuild/core@1.6.15)
+      '@types/react':
+        specifier: ^18.3.27
+        version: 18.3.27
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.27)
+      autoprefixer:
+        specifier: '10'
+        version: 10.4.23(postcss@8.5.6)
+      eslint:
+        specifier: ^9.19.0
+        version: 9.39.2(jiti@2.6.1)
+      eslint-plugin-react-hooks:
+        specifier: ^7.0.1
+        version: 7.0.1(eslint@9.39.2(jiti@2.6.1))
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.24
+        version: 0.4.26(eslint@9.39.2(jiti@2.6.1))
+      globals:
+        specifier: ^15.14.0
+        version: 15.15.0
+      postcss:
+        specifier: '8'
+        version: 8.5.6
+      prettier:
+        specifier: ^3.7.4
+        version: 3.7.4
+      tailwindcss:
+        specifier: ^3.4.14
+        version: 3.4.19
+      tailwindcss-animate:
+        specifier: '1'
+        version: 1.0.7(tailwindcss@3.4.19)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      typescript-eslint:
+        specifier: ^8.48.1
+        version: 8.50.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+
   apps/mfe1:
     dependencies:
       '@module-federation/bridge-react':
@@ -10949,12 +11046,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/react@3.1.1(@types/react@18.3.27)(react@18.3.1)':
-    dependencies:
-      '@types/mdx': 2.0.13
-      '@types/react': 18.3.27
-      react: 18.3.1
-
   '@mdx-js/react@3.1.1(@types/react@18.3.27)(react@19.2.3)':
     dependencies:
       '@types/mdx': 2.0.13
@@ -11906,12 +11997,12 @@ snapshots:
 
   '@storybook/addon-docs@8.6.15(@types/react@18.3.27)(storybook@8.6.15(prettier@3.7.4))':
     dependencies:
-      '@mdx-js/react': 3.1.1(@types/react@18.3.27)(react@18.3.1)
-      '@storybook/blocks': 8.6.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.15(prettier@3.7.4))
+      '@mdx-js/react': 3.1.1(@types/react@18.3.27)(react@19.2.3)
+      '@storybook/blocks': 8.6.15(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@8.6.15(prettier@3.7.4))
       '@storybook/csf-plugin': 8.6.15(storybook@8.6.15(prettier@3.7.4))
-      '@storybook/react-dom-shim': 8.6.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.15(prettier@3.7.4))
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      '@storybook/react-dom-shim': 8.6.15(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@8.6.15(prettier@3.7.4))
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
       storybook: 8.6.15(prettier@3.7.4)
       ts-dedent: 2.2.0
     transitivePeerDependencies:
@@ -11967,14 +12058,14 @@ snapshots:
       memoizerific: 1.11.3
       storybook: 8.6.15(prettier@3.7.4)
 
-  '@storybook/blocks@8.6.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.15(prettier@3.7.4))':
+  '@storybook/blocks@8.6.15(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@8.6.15(prettier@3.7.4))':
     dependencies:
-      '@storybook/icons': 1.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/icons': 1.6.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       storybook: 8.6.15(prettier@3.7.4)
       ts-dedent: 2.2.0
     optionalDependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
 
   '@storybook/builder-vite@8.6.15(storybook@8.6.15(prettier@3.7.4))(vite@7.3.0(@types/node@24.10.4)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1))':
     dependencies:
@@ -12016,10 +12107,10 @@ snapshots:
 
   '@storybook/global@5.0.0': {}
 
-  '@storybook/icons@1.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@storybook/icons@1.6.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
 
   '@storybook/manager-api@8.6.15(storybook@8.6.15(prettier@3.7.4))':
     dependencies:
@@ -12033,6 +12124,12 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+      storybook: 8.6.15(prettier@3.7.4)
+
+  '@storybook/react-dom-shim@8.6.15(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@8.6.15(prettier@3.7.4))':
+    dependencies:
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
       storybook: 8.6.15(prettier@3.7.4)
 
   '@storybook/react-vite@8.6.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.54.0)(storybook@8.6.15(prettier@3.7.4))(typescript@5.9.3)(vite@7.3.0(@types/node@24.10.4)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1))':

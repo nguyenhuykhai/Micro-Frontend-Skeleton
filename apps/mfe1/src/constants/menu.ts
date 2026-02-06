@@ -4,7 +4,7 @@ import { Book, House, LayoutList, ShieldX } from "lucide-react";
 export const getMenuList = (pathname: string): Group[] => {
   return [
     {
-      groupLabel: "Host App",
+      groupLabel: "HOST APP",
       menus: [
         {
           href: "/",
@@ -30,7 +30,7 @@ export const getMenuList = (pathname: string): Group[] => {
       ],
     },
     {
-      groupLabel: "Micro App",
+      groupLabel: "MICRO APP",
       menus: [
         {
           href: "/task-management",

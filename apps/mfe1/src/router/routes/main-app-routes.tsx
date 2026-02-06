@@ -6,6 +6,7 @@ import type { IPermission } from "@/types";
 const TaskManagement = lazy(() => import("@/pages/TaskManagement"));
 const Home = lazy(() => import("@/pages/Home"));
 const DocsPage = lazy(() => import("@/pages/DocsPage"));
+const FocusHive = lazy(() => import("@/pages/FocusHive"));
 const AppLayout = lazy(() => import("@/components/layouts/app-layout"));
 const NotFound = lazy(() => import("@/components/common/templates/NotFound"));
 const NotHavePermission = lazy(
@@ -29,6 +30,12 @@ export const MainAppRoutes = () => {
       key: "docs",
       path: "docs/*",
       component: DocsPage,
+      permission: true,
+    },
+    {
+      key: "focushive",
+      path: "focushive/*",
+      component: FocusHive,
       permission: true,
     },
   ];

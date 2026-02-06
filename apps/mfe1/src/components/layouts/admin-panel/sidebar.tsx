@@ -1,58 +1,42 @@
 import { Menu } from "@/components/layouts/admin-panel/menu";
 import { SidebarToggle } from "@/components/layouts/admin-panel/sidebar-toggle";
-import { Button } from "@repo/ui";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
 import { cn } from "@repo/ui/lib/utils";
-import { PanelsTopLeft } from "lucide-react";
-import { Link } from "react-router";
 
 export function Sidebar() {
   const sidebar = useStore(useSidebar, (x) => x);
   if (!sidebar) return null;
   const { isOpen, toggleOpen, getOpenState, setIsHover, settings } = sidebar;
+
   return (
-    <aside
-      className={cn(
-        "fixed top-0 left-0 z-20 h-screen -translate-x-full lg:translate-x-0 transition-[width] ease-in-out duration-300",
-        !getOpenState() ? "w-[90px]" : "w-72",
-        settings.disabled && "hidden",
-      )}
-    >
+    <>
       <SidebarToggle isOpen={isOpen} setIsOpen={toggleOpen} />
-      <div
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-        // Updated: Added dark background and border
-        className="relative h-full flex flex-col px-3 py-4 overflow-y-auto bg-sidebar dark:bg-zinc-950 border-r border-sidebar-border dark:border-zinc-800 shadow-md dark:shadow-zinc-800"
+      <aside
+        className={cn(
+          "fixed top-0 left-0 z-20 h-screen -translate-x-full lg:translate-x-0 transition-[width] ease-in-out duration-300",
+          !getOpenState() ? "w-0" : "w-72",
+          settings.disabled && "hidden",
+        )}
       >
-        <Button
+        <div
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
           className={cn(
-            "transition-transform ease-in-out duration-300 mb-1",
-            !getOpenState() ? "translate-x-1" : "translate-x-0",
+            "relative h-full flex flex-col overflow-y-auto",
+            // Glassmorphism effect
+            "bg-[rgba(20,30,50,0.8)] dark:bg-[rgba(20,30,50,0.8)]",
+            "backdrop-blur-[20px]",
+            "border-r border-[rgba(255,255,255,0.1)]",
+            "shadow-lg",
+            // Adjust padding based on state
+            !getOpenState() ? "px-0 py-20" : "px-3 py-6",
           )}
-          variant="link"
-          asChild
         >
-          <Link
-            to="/task-management"
-            className="flex items-center gap-2 text-sidebar-foreground dark:text-zinc-100 hover:text-sidebar-accent-foreground"
-          >
-            <PanelsTopLeft className="w-6 h-6 mr-1" />
-            <h1
-              className={cn(
-                "font-bold text-lg whitespace-nowrap transition-[transform,opacity,display] ease-in-out duration-300 text-sidebar-foreground dark:text-zinc-100",
-                !getOpenState()
-                  ? "-translate-x-96 opacity-0 hidden"
-                  : "translate-x-0 opacity-100",
-              )}
-            >
-              Micro Frontend
-            </h1>
-          </Link>
-        </Button>
-        <Menu isOpen={getOpenState()} />
-      </div>
-    </aside>
+          {/* Navigation Menu */}
+          <Menu isOpen={getOpenState()} />
+        </div>
+      </aside>
+    </>
   );
 }

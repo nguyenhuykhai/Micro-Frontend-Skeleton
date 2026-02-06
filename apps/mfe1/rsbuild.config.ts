@@ -9,6 +9,10 @@ const buildRemotes = () => {
   const mfe2Scope = process.env.VITE_MFE2_SCOPE || "remote";
   remotes[mfe2Scope] = `${mfe2Scope}@${mfe2Url}`;
 
+  const focushiveUrl = process.env.VITE_FOCUSHIVE_BASE_URL + "/remoteEntry.js";
+  const focushiveScope = process.env.VITE_FOCUSHIVE_SCOPE || "focushive";
+  remotes[focushiveScope] = `${focushiveScope}@${focushiveUrl}`;
+
   return remotes;
 };
 
