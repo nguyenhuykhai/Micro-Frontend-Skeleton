@@ -4,17 +4,10 @@ import StatsWidget from "@/components/widgets/stats-widget";
 
 const Dashboard = () => {
   return (
-    <div className="p-8 space-y-6">
+    <div>
       {/* Dashboard Header */}
       <header className="space-y-2">
         <div className="flex justify-between items-start">
-          <div>
-            <h1 className="text-4xl font-bold text-white mb-2">
-              Good Afternoon, Alex
-            </h1>
-            <p className="text-base text-white/70">It's time for deep work.</p>
-          </div>
-
           {/* Weather Widget (Header) */}
           <div className="glass-panel rounded-lg px-4 py-2 flex items-center gap-2">
             <svg

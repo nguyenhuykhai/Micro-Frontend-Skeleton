@@ -17,7 +17,11 @@ const AppProvider: React.FC<AppProviderProps> = ({
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
 
   return (
-    <div id="focushive-root" ref={setContainer}>
+    <div
+      id="focushive-root"
+      ref={setContainer}
+      className="min-h-0 bg-transparent"
+    >
       <PortalContainerProvider container={container}>
         {children ? <>{children}</> : <Outlet />}
       </PortalContainerProvider>

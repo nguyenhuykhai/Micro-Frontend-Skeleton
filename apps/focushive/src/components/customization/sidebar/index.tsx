@@ -17,7 +17,7 @@ const CustomizationSidebar = () => {
   ];
 
   return (
-    <aside className="w-80 glass-panel border-l border-white/10 flex flex-col">
+    <aside className="w-80 max-h-screen glass-panel border-l border-white/10 flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-white/10">
         <div className="flex justify-between items-start mb-2">
