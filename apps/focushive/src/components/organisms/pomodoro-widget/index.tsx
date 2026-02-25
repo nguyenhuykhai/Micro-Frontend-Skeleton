@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CountdownCircleTimer } from "@/components/molecules/CountdownCircleTimer";
+import { CountdownCircleTimer } from "@/components/molecules/countdown-circle-timer";
 import { MODE_ORDER, MODES } from "./constants";
 import type { Mode } from "./types";
 import { endMode, formatTime, skipMode } from "./utils";
