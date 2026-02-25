@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router";
 import { withLazyLoading, withLazyLoadingPermission } from "../router-helper";
 import type { IPermission } from "@/types";
+import { APP_ROUTES } from "@/constants/remote";
 
 const TaskManagement = lazy(() => import("@/pages/TaskManagement"));
 const Home = lazy(() => import("@/pages/Home"));
@@ -21,20 +22,20 @@ export const MainAppRoutes = () => {
     permission?: IPermission | IPermission[] | boolean;
   }[] = [
     {
-      key: "task-management",
-      path: "task-management/*",
+      key: APP_ROUTES.MFE2.key,
+      path: APP_ROUTES.MFE2.path,
       component: TaskManagement,
       permission: true,
     },
     {
-      key: "docs",
-      path: "docs/*",
+      key: APP_ROUTES.DOCS.key,
+      path: APP_ROUTES.DOCS.path,
       component: DocsPage,
       permission: true,
     },
     {
-      key: "focushive",
-      path: "focushive/*",
+      key: APP_ROUTES.FOCUS_HIVE.key,
+      path: APP_ROUTES.FOCUS_HIVE.path,
       component: FocusHive,
       permission: true,
     },

@@ -1,7 +1,7 @@
 import React, { type ReactNode, useState } from "react";
 import "../../../focushive.css";
 import { Outlet } from "react-router";
-import { useThemeSync } from "@/hooks/useThemeSync";
+import { useThemeSync } from "@/shared/hooks/useThemeSync";
 import { PortalContainerProvider } from "@repo/ui";
 
 interface AppProviderProps {

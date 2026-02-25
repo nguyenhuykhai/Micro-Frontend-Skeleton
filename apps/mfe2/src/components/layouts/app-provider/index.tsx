@@ -1,8 +1,8 @@
 import React, { type ReactNode, useState } from "react";
 import "../../../mfe2.css";
 import { Outlet } from "react-router";
-import { useThemeSync } from "@/hooks/useThemeSync";
 import { PortalContainerProvider } from "@repo/ui";
+import { useThemeSync } from "@/hooks/useThemeSync";
 
 interface AppProviderProps {
   children?: ReactNode;

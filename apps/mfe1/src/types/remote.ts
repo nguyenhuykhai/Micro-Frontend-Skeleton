@@ -5,3 +5,9 @@ export interface RemoteApp {
   scope: string;
   module: string;
 }
+
+export interface AppRoute {
+  key: string;
+  path: string;
+  isRemote?: boolean;
+}

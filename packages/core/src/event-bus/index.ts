@@ -5,6 +5,7 @@ import type {
   TaskCreatedPayload,
   TaskUpdatedPayload,
   TaskDeletedPayload,
+  SidebarPayload,
 } from "../types";
 
 export interface AppEventMap {
@@ -12,9 +13,14 @@ export interface AppEventMap {
   "theme:change": ThemePayload;
   "modal:open": ModalPayload;
   "user:session-expired": { reason: string };
+
+  // Task events
   "task:created": TaskCreatedPayload;
   "task:updated": TaskUpdatedPayload;
   "task:deleted": TaskDeletedPayload;
+
+  // Sidebar events
+  "sidebar:toggle": SidebarPayload;
 }
 
 export const publishEvent = <K extends keyof AppEventMap>(

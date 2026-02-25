@@ -50,3 +50,7 @@ export interface TaskDeletedPayload {
   taskId: number;
   sourceInstanceId: string;
 }
+
+export interface SidebarPayload {
+  isOpen: boolean;
+}

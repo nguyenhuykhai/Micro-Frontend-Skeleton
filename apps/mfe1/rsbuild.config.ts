@@ -40,6 +40,10 @@ export default defineConfig({
     pluginModuleFederation({
       name: "host",
       remotes: buildRemotes(),
+      exposes: {
+        "./MyNavbar": "./src/components/common/molecules/my-navbar",
+      },
+      filename: "remoteEntry.js",
       shared: {
         ...dependencies,
         react: {
